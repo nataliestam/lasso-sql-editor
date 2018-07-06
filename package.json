@@ -18,6 +18,9 @@
     "webpack-cli": "^3.0.8"
   },
   "dependencies": {
-    "npm": "^6.1.0"
+    "npm": "^6.1.0",
+    "prop-types": "^15.6.2",
+    "react": "^16.4.1",
+    "react-dom": "^16.4.1"
   }
 }
