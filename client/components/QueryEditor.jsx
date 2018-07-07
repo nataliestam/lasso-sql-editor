@@ -35,7 +35,7 @@ class QueryEditor extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      query: '',
+      query: 'select * from related_products where product_id = 4;',
     };
 
     this.handleChange = this.handleChange.bind(this);
