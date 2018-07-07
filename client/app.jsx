@@ -1,5 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import QueryEditor from './components/QueryEditor.jsx';
 import QueryDetails from './components/QueryDetails.jsx';
 
@@ -18,11 +19,15 @@ class App extends React.Component  {
   }
 
   runQuery(query) {
-    console.log(query);
-
     this.setState({ query });
 
-    // get query results from database
+    axios.post('/query/run', {
+      query,
+    }).then((response) => {
+      console.log(response.data.rows);
+    }).catch((error) => {
+      console.log(error);
+    });
   }
 
   saveQuery(title, description) {

@@ -1,11 +1,24 @@
 const express = require('express');
 const path = require('path');
+const bodyParser = require('body-parser');
+// const cors = require('cors');
+const db = require('../db/index.js');
 
 const app = express();
+// app.use(cors());
+app.use(bodyParser.json());
 app.use('/', express.static(path.join(__dirname, '/../public')));
 
-app.get('/query/run', (req, res) => {
-  
+app.post('/query/run', (req, res) => {
+  console.log('querying...' + req.body.query);
+
+  db.query(req.body.query, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
 });
 
 app.get('/query/saved/:id', (req, res) => {
