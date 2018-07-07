@@ -1,12 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import ResultHeader from './ResultHeader.jsx';
+import ResultRow from './ResultRow.jsx';
 
 const ResultsTable = (props) => {
   if (props.data.length > 0) {
     return (
-      <div>
-        {props.data[0].hi}
-      </div>
+      <table>
+        {Object.keys(props.data[0]).map(col => <ResultHeader col={col} />)}
+        {props.data.map(row => <ResultRow row={row} />)}
+      </table>
     );
   }
 

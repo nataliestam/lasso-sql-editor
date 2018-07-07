@@ -27,7 +27,7 @@ class App extends React.Component  {
     }).then((response) => {
       this.setState({
         results: response.data.rows,
-      });
+      }, () => console.log(this.state));
     }).catch((error) => {
       console.log(error);
     });
