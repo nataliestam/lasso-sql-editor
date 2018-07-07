@@ -5,7 +5,21 @@ import QueryEditor from './components/QueryEditor.jsx';
 import QueryDetails from './components/QueryDetails.jsx';
 import ResultsTable from './components/ResultsTable.jsx';
 
-class App extends React.Component  {
+const styles = {
+  body: {
+    fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+  },
+  query: {
+    display: 'flex',
+    justifyContent: 'space-around',
+    marginBottom: '50px',
+  },
+  results: {
+
+  },
+};
+
+class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -27,27 +41,31 @@ class App extends React.Component  {
     }).then((response) => {
       this.setState({
         results: response.data.rows,
-      }, () => console.log(this.state));
+      });
     }).catch((error) => {
       console.log(error);
     });
   }
 
   saveQuery(title, description) {
-    console.log(title, description);
-
-    this.setState({ title, description });
+    this.setState({ title, description }, () => {
+      console.log(this.state.title, this.state.description, this.state.query);
+    });
 
     // save query to database
   }
 
   render() {
     return (
-      <div>
+      <div style={styles.body}>
         <h1>Lasso</h1>
-        <QueryEditor handleSubmit={this.runQuery} />
-        <QueryDetails handleSubmit={this.saveQuery} />
-        <ResultsTable data={this.state.results} />
+        <div style={styles.query}>
+          <QueryEditor handleSubmit={this.runQuery} />
+          <QueryDetails handleSubmit={this.saveQuery} />
+        </div>
+        <div style={styles.results}>
+          <ResultsTable data={this.state.results} />
+        </div>
       </div>
     );
   }
