@@ -2,7 +2,6 @@ const mongoose = require('mongoose');
 const autoIncrement = require('mongoose-auto-increment');
 
 const connection = mongoose.createConnection('mongodb://localhost:27017/lasso');
-// mongoose.connect('mongodb://localhost:27017/lasso');
 autoIncrement.initialize(connection);
 
 const QuerySchema = mongoose.Schema({
