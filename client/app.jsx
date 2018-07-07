@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import QueryEditor from './components/QueryEditor.jsx';
 import QueryDetails from './components/QueryDetails.jsx';
+import ResultsTable from './components/ResultsTable.jsx';
 
 class App extends React.Component  {
   constructor(props) {
@@ -24,7 +25,9 @@ class App extends React.Component  {
     axios.post('/query/run', {
       query,
     }).then((response) => {
-      console.log(response.data.rows);
+      this.setState({
+        results: response.data.rows,
+      });
     }).catch((error) => {
       console.log(error);
     });
@@ -44,6 +47,7 @@ class App extends React.Component  {
         <h1>Lasso</h1>
         <QueryEditor handleSubmit={this.runQuery} />
         <QueryDetails handleSubmit={this.saveQuery} />
+        <ResultsTable data={this.state.results} />
       </div>
     );
   }
