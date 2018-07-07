@@ -17,6 +17,7 @@ const styles = {
     width: '100%',
     border: '1px solid #DBDBDB',
     boxShadow: 'none', // remove defaults
+    fontSize: '16px',
   },
   descInput: {
     width: '100%',
@@ -24,6 +25,7 @@ const styles = {
     border: '1px solid #DBDBDB',
     resize: 'none', // remove defaults
     outline: 'none', // remove defaults
+    fontSize: '16px',
   },
   saveButton: {
     background: '#5cb85c',
