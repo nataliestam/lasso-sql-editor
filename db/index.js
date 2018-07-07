@@ -1,20 +1,43 @@
-const { Client } = require('pg');
+const mongoose = require('mongoose');
+const autoIncrement = require('mongoose-auto-increment');
 
-const client = new Client({
-  // this will be generated dynamically in the future
-  database: 'Natalie',
-  host: 'localhost',
-  port: '5432',
+const connection = mongoose.createConnection('mongodb://localhost:27017/lasso');
+// mongoose.connect('mongodb://localhost:27017/lasso');
+autoIncrement.initialize(connection);
+
+const QuerySchema = mongoose.Schema({
+  name: String,
+  description: String,
+  query: String,
 });
+QuerySchema.plugin(autoIncrement.plugin, 'Query');
+const Query = connection.model('Query', QuerySchema);
 
-client.connect();
-
-module.exports.query = function getQueryResults(userQuery, callback) {
-  client.query(userQuery, (err, results) => {
+module.exports.addQuery = (newQuery, callback) => {
+  Query.create(newQuery, (err, data) => {
     if (err) {
-      callback(err, null);
+      callback(err);
     } else {
-      callback(null, results);
+      callback(null, data);
     }
   });
 };
+
+module.exports.retrieveQuery = (id, callback) => {
+  Query.findById(id, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
+
+module.exports.retrieveQuery(1, (err, data) => {
+  if (err) {
+    console.log(err);
+  } else {
+    console.log(data);
+  }
+});
+
