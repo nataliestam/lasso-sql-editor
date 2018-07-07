@@ -31,3 +31,13 @@ module.exports.retrieveQuery = (id, callback) => {
     }
   });
 };
+
+module.exports.updateQuery = (id, update, callback) => {
+  Query.findByIdAndUpdate(id, update, (err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};
