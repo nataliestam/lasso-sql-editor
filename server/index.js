@@ -14,8 +14,10 @@ app.post('/query/run', (req, res) => {
 
   db.query(req.body.query, (err, data) => {
     if (err) {
+      console.log(err)
       res.status(500).send(err);
     } else {
+      console.log(data);
       res.status(200).send(data);
     }
   });
