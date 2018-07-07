@@ -32,12 +32,3 @@ module.exports.retrieveQuery = (id, callback) => {
     }
   });
 };
-
-module.exports.retrieveQuery(1, (err, data) => {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log(data);
-  }
-});
-
