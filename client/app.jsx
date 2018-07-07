@@ -36,6 +36,7 @@ class App extends React.Component  {
   render() {
     return (
       <div>
+        <h1>Lasso</h1>
         <QueryEditor handleSubmit={this.runQuery} />
         <QueryDetails handleSubmit={this.saveQuery} />
       </div>
