@@ -7,8 +7,10 @@ const ResultsTable = (props) => {
   if (props.data.length > 0) {
     return (
       <table>
-        {Object.keys(props.data[0]).map(col => <ResultHeader col={col} />)}
-        {props.data.map(row => <ResultRow row={row} />)}
+        <ResultHeader row={Object.keys(props.data[0])} />
+        <tbody>
+          {props.data.map((row, i) => <ResultRow key={i} row={row} />)}
+        </tbody>
       </table>
     );
   }
