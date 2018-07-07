@@ -9,6 +9,10 @@ const styles = {
   body: {
     fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
   },
+  heading: {
+    margin: '10px',
+    marginLeft: '20px',
+  },
   query: {
     display: 'flex',
     justifyContent: 'space-around',
@@ -58,7 +62,7 @@ class App extends React.Component {
   render() {
     return (
       <div style={styles.body}>
-        <h1>Lasso</h1>
+        <h1 style={styles.heading}>Lasso</h1>
         <div style={styles.query}>
           <QueryEditor handleSubmit={this.runQuery} />
           <QueryDetails handleSubmit={this.saveQuery} />

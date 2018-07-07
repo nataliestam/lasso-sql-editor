@@ -1,12 +1,24 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const styles = {
+  header: {
+    textAlign: 'left',
+    paddingBottom: '5px'
+  },
+};
+
 const ResultHeader = props => (
   <thead>
     <tr>
       {
         props.row.map(col => (
-          <th key={col}>{col}</th>
+          <th
+            style={styles.header}
+            key={col}
+          >
+            {col}
+          </th>
         ))
       }
     </tr>
