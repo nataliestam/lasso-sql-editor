@@ -34,22 +34,17 @@ const styles = {
 class QueryEditor extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      query: 'select * from related_products where product_id = 4;',
-    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleRun = this.handleRun.bind(this);
   }
 
   handleChange(e) {
-    this.setState({
-      query: e.target.value,
-    });
+    this.props.handleChange(e.target.value);
   }
 
   handleRun() {
-    this.props.handleSubmit(this.state.query);
+    this.props.handleSubmit();
   }
 
   render() {
@@ -58,7 +53,7 @@ class QueryEditor extends React.Component {
         <textarea
           style={styles.editor}
           type="text"
-          value={this.state.query}
+          value={this.props.query}
           onChange={this.handleChange}
         />
         <button
@@ -73,7 +68,9 @@ class QueryEditor extends React.Component {
 }
 
 QueryEditor.propTypes = {
+  query: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
+  handleChange: PropTypes.func.isRequired,
 };
 
 export default QueryEditor;

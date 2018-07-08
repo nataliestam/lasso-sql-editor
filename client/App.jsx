@@ -30,12 +30,13 @@ class App extends React.Component {
       id: 2,
       title: '',
       description: '',
-      query: '',
+      query: 'select * from related_products where product_id = 4;',
       results: [],
     };
 
     this.runQuery = this.runQuery.bind(this);
     this.saveQuery = this.saveQuery.bind(this);
+    this.updateQueryText = this.updateQueryText.bind(this);
   }
 
   // retrieves query text based on id
@@ -55,18 +56,22 @@ class App extends React.Component {
       });
   }
 
+  updateQueryText(query) {
+    this.setState({
+      query,
+    }, () => console.log(this.state));
+  }
+
   // runs the query in the query editor
-  runQuery(query) {
-    this.setState({ query }, () => {
-      axios.post('/query/run', {
-        query: this.state.query,
-      }).then((response) => {
-        this.setState({
-          results: response.data.rows,
-        });
-      }).catch((error) => {
-        console.log(error);
+  runQuery() {
+    axios.post('/query/run', {
+      query: this.state.query,
+    }).then((response) => {
+      this.setState({
+        results: response.data.rows,
       });
+    }).catch((error) => {
+      console.log(error);
     });
   }
 
@@ -92,7 +97,11 @@ class App extends React.Component {
       <div style={styles.body}>
         <h1 style={styles.heading}>Lasso</h1>
         <div style={styles.query}>
-          <QueryEditor handleSubmit={this.runQuery} />
+          <QueryEditor
+            query={this.state.query}
+            handleChange={this.updateQueryText} 
+            handleSubmit={this.runQuery}
+          />
           <QueryDetails handleSubmit={this.saveQuery} />
         </div>
         <div style={styles.results}>
