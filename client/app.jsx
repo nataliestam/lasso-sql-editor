@@ -27,6 +27,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
+      id: null,
       title: '',
       description: '',
       query: '',
@@ -38,25 +39,33 @@ class App extends React.Component {
   }
 
   runQuery(query) {
-    this.setState({ query });
-
-    axios.post('/query/run', {
-      query,
-    }).then((response) => {
-      this.setState({
-        results: response.data.rows,
+    this.setState({ query }, () => {
+      axios.post('/query/run', {
+        query: this.state.query,
+      }).then((response) => {
+        this.setState({
+          results: response.data.rows,
+        });
+      }).catch((error) => {
+        console.log(error);
       });
-    }).catch((error) => {
-      console.log(error);
     });
   }
 
   saveQuery(title, description) {
     this.setState({ title, description }, () => {
-      console.log(this.state.title, this.state.description, this.state.query);
+      axios.post('/query/saved', {
+        title: this.state.title,
+        description: this.state.description,
+        query: this.state.query,
+      }).then((response) => {
+        this.setState({
+          id: response.data._id,
+        });
+      }).catch((error) => {
+        console.log(error);
+      });
     });
-
-    // save query to database
   }
 
   render() {

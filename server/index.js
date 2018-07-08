@@ -1,35 +1,47 @@
 const express = require('express');
 const path = require('path');
 const bodyParser = require('body-parser');
-// const cors = require('cors');
 const db = require('../db/index.js');
+const userdb = require('../db/postgres-client.js');
 
 const app = express();
-// app.use(cors());
 app.use(bodyParser.json());
 app.use('/', express.static(path.join(__dirname, '/../public')));
 
+// queries to user specified db
 app.post('/query/run', (req, res) => {
-  console.log('querying...' + req.body.query);
-
-  db.query(req.body.query, (err, data) => {
+  userdb.query(req.body.query, (err, data) => {
     if (err) {
-      console.log(err)
       res.status(500).send(err);
     } else {
-      console.log(data);
       res.status(200).send(data);
     }
   });
 });
 
+// queries to application db
 app.get('/query/saved/:id', (req, res) => {
-  // retrieves saved query and returns it to the front end
+  db.retrieveQuery(req.params.id, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
 });
 
 app.post('/query/saved', (req, res) => {
-  // saves query to db and returns the assigned id
-  // changes url to display new id
+  db.addQuery(req.body, (err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+app.put('/query/saved/:id', (req, res) => {
+  // updates an existing query and returns
 });
 
 app.listen(3000, () => console.log('listening on port 3000'));

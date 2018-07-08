@@ -5,7 +5,7 @@ const connection = mongoose.createConnection('mongodb://localhost:27017/lasso');
 autoIncrement.initialize(connection);
 
 const QuerySchema = mongoose.Schema({
-  name: String,
+  title: String,
   description: String,
   query: String,
 });
