@@ -27,7 +27,7 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: null,
+      id: 2,
       title: '',
       description: '',
       query: '',
@@ -38,6 +38,24 @@ class App extends React.Component {
     this.saveQuery = this.saveQuery.bind(this);
   }
 
+  // retrieves query text based on id
+  getQuery() {
+    axios.get(`/query/saved/${this.state.id}`)
+      .then((response) => {
+        this.setState({
+          id: response._id,
+          title: response.title,
+          description: response.description,
+          query: response.query,
+        }, () => {
+          this.runQuery(); // just realized that this shouldn't take a param, should just use the state
+        });
+      }).catch((error) => {
+        console.log(error);
+      });
+  }
+
+  // runs the query in the query editor
   runQuery(query) {
     this.setState({ query }, () => {
       axios.post('/query/run', {
@@ -52,6 +70,7 @@ class App extends React.Component {
     });
   }
 
+  // saves the query, title, and desc to mongo
   saveQuery(title, description) {
     this.setState({ title, description }, () => {
       axios.post('/query/saved', {
