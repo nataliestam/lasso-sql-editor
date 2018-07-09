@@ -2,11 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Chart = (props) => {
-  // if (typeof )
-
-
   if (props.data.length > 0) {
-    return <div>I will be a chart!</div>;
+    if (
+      props.data[0].length === 2
+      && typeof props.data[0][0] === 'string'
+      && typeof props.data[0][1] === 'number'
+    ) {
+      return <div>I will be a bar chart!</div>;
+    } else if (
+      props.data[0].length === 3
+      && typeof props.data[0][0] === 'string'
+      && typeof props.data[0][1] === 'number'
+      && typeof props.data[0][2] === 'number'
+    ) {
+      return <div>I will be a bar chart!</div>;
+    } else if (
+      props.data[0].length === 2
+      && typeof props.data[0][0] === 'number'
+      && typeof props.data[0][1] === 'number'
+    ) {
+      return <div>I will be a scatter plot!</div>;
+    }
   }
 
   return null;

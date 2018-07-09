@@ -61,7 +61,7 @@ class App extends React.Component {
   updateQueryText(query) {
     this.setState({
       query,
-    }, () => console.log(this.state));
+    });
   }
 
   // runs the query in the query editor
