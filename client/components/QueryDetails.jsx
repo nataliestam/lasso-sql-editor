@@ -44,8 +44,8 @@ class QueryDetails extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      name: '',
-      description: '',
+      title: this.props.title,
+      description: this.props.description,
     };
 
     this.handleNameChange = this.handleNameChange.bind(this);
@@ -53,9 +53,18 @@ class QueryDetails extends React.Component {
     this.handleSave = this.handleSave.bind(this);
   }
 
+  componentDidUpdate(prevProps) {
+    if (prevProps !== this.props) {
+      this.setState({
+        title: this.props.title,
+        description: this.props.description,
+      });
+    }
+  }
+
   handleNameChange(e) {
     this.setState({
-      name: e.target.value,
+      title: e.target.value,
     });
   }
 
@@ -66,7 +75,7 @@ class QueryDetails extends React.Component {
   }
 
   handleSave() {
-    this.props.handleSubmit(this.state.name, this.state.description);
+    this.props.handleSubmit(this.state.title, this.state.description);
   }
 
   render() {
@@ -79,7 +88,7 @@ class QueryDetails extends React.Component {
           <input
             style={styles.nameInput}
             type="text"
-            value={this.state.name}
+            value={this.state.title}
             onChange={this.handleNameChange}
           />
         </div>
@@ -106,6 +115,8 @@ class QueryDetails extends React.Component {
 }
 
 QueryDetails.propTypes = {
+  title: PropTypes.string.isRequired,
+  description: PropTypes.string.isRequired,
   handleSubmit: PropTypes.func.isRequired,
 };
 
