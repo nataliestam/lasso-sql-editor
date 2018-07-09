@@ -20,6 +20,10 @@ const ResultsTable = (props) => {
         </tbody>
       </table>
     );
+  } else if (props.error) {
+    return (
+      <div>Error!  Please check your query and retry.</div>
+    );
   }
 
   return null;
@@ -28,6 +32,7 @@ const ResultsTable = (props) => {
 ResultsTable.propTypes = {
   data: PropTypes.arrayOf(PropTypes.array).isRequired,
   columnNames: PropTypes.arrayOf(PropTypes.string).isRequired,
+  error: PropTypes.bool.isRequired,
 };
 
 export default ResultsTable;

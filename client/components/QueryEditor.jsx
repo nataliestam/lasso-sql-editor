@@ -8,7 +8,7 @@ const styles = {
     display: 'flex',
   },
   editor: {
-    height: '300px',
+    height: '240px',
     margin: '10px',
     color: 'white',
     fontFamily: '"Courier New", Courier, monospace',
