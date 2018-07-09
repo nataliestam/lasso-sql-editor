@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Scatter from './charts/Scatter.jsx';
+import BarChart2Col from './charts/BarChart2Col.jsx';
+import BarChart3Col from './charts/BarChart3Col.jsx';
 
 const Chart = (props) => {
   if (props.data.length > 0) {
@@ -9,14 +11,14 @@ const Chart = (props) => {
       && typeof props.data[0][0] === 'string'
       && typeof props.data[0][1] === 'number'
     ) {
-      return <div>I will be a bar chart!</div>;
+      return <BarChart2Col data={props.data} columnNames={props.columnNames} />;
     } else if (
       props.data[0].length === 3
       && typeof props.data[0][0] === 'string'
       && typeof props.data[0][1] === 'number'
       && typeof props.data[0][2] === 'number'
     ) {
-      return <div>I will be a bar chart!</div>;
+      return <BarChart3Col data={props.data} columnNames={props.columnNames} />;
     } else if (
       props.data[0].length === 2
       && typeof props.data[0][0] === 'number'

@@ -31,7 +31,7 @@ class App extends React.Component {
       id: 2,
       title: '',
       description: '',
-      query: 'select product_id, price from related_products where product_id = 4;',
+      query: 'select title, price, 7 as a_number from related_products where product_id = 4;',
       columnNames: [],
       data: [],
     };
