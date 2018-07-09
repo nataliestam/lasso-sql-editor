@@ -6,13 +6,14 @@ const userdb = require('../db/postgres-client.js');
 
 const app = express();
 app.use(bodyParser.json());
-app.use('/', express.static(path.join(__dirname, '/../public')));
+app.use('/query', express.static(path.join(__dirname, '/../public')));
+app.use('/query/:id', express.static(path.join(__dirname, '/../public')));
 
 // queries to user specified db
 app.post('/query/run', (req, res) => {
   userdb.query(req.body.query, (err, results) => {
     if (err) {
-      res.status(500).send(err);
+      res.status(400).send(err);
     } else {
       const columns = Object.keys(results.rows[0]);
       const data = results.rows.map((row) => {

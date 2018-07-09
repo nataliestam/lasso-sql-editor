@@ -28,12 +28,13 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: 2,
+      id: this.props.queryId,
       title: '',
       description: '',
-      query: 'select title, price, 7 as a_number from related_products where product_id = 4;',
+      query: '',
       columnNames: [],
       data: [],
+      error: false,
     };
 
     this.runQuery = this.runQuery.bind(this);
@@ -41,15 +42,21 @@ class App extends React.Component {
     this.updateQueryText = this.updateQueryText.bind(this);
   }
 
+  componentDidMount() {
+    if (parseInt(this.state.id) > 0) {
+      this.getQuery();
+    }
+  }
+
   // retrieves query text based on id
   getQuery() {
     axios.get(`/query/saved/${this.state.id}`)
       .then((response) => {
+        console.log(response)
         this.setState({
-          id: response._id,
-          title: response.title,
-          description: response.description,
-          query: response.query,
+          title: response.data.title,
+          description: response.data.description,
+          query: response.data.query,
         }, () => {
           this.runQuery();
         });
@@ -72,9 +79,18 @@ class App extends React.Component {
       this.setState({
         columnNames: response.data.columns,
         data: response.data.data,
+        error: false,
       });
     }).catch((error) => {
-      console.log(error);
+      if (error.response) {
+        this.setState({
+          columnNames: [],
+          data: [],
+          error: true,
+        });
+      } else {
+        console.log(error);
+      }
     });
   }
 
@@ -105,7 +121,11 @@ class App extends React.Component {
             handleChange={this.updateQueryText}
             handleSubmit={this.runQuery}
           />
-          <QueryDetails handleSubmit={this.saveQuery} />
+          <QueryDetails
+            title={this.state.title}
+            description={this.state.description}
+            handleSubmit={this.saveQuery}
+          />
         </div>
         <div>
           <Chart
@@ -114,11 +134,23 @@ class App extends React.Component {
           />
         </div>
         <div style={styles.results}>
-          <ResultsTable columnNames={this.state.columnNames} data={this.state.data} />
+          <ResultsTable
+            columnNames={this.state.columnNames}
+            data={this.state.data}
+            error={this.state.error}
+          />
         </div>
       </div>
     );
   }
 }
+
+App.propTypes = {
+  queryId: PropTypes.string,
+};
+
+App.defaultProps = {
+  queryId: '0',
+};
 
 export default App;
