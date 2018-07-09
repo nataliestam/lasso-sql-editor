@@ -4,7 +4,6 @@ import { FlexibleWidthXYPlot, VerticalGridLines, HorizontalGridLines, XAxis, YAx
 
 const BarChart2Col = props => (
   <FlexibleWidthXYPlot height={300} margin={50} xType="ordinal">
-    <VerticalGridLines style={{ stroke: 'grey' }} />
     <HorizontalGridLines style={{ stroke: 'grey' }} />
     <VerticalBarSeries data={props.data.map(row => ({ x: row[0], y: row[1] }))} />
     <XAxis
