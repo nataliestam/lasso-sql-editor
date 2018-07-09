@@ -31,7 +31,7 @@ class App extends React.Component {
       id: 2,
       title: '',
       description: '',
-      query: 'select * from related_products where product_id = 4;',
+      query: 'select product_id, price from related_products where product_id = 4;',
       columnNames: [],
       data: [],
     };
@@ -108,7 +108,10 @@ class App extends React.Component {
           <QueryDetails handleSubmit={this.saveQuery} />
         </div>
         <div>
-          <Chart columnNames={this.state.columnNames} data={this.state.data} />
+          <Chart
+            columnNames={this.state.columnNames}
+            data={this.state.data}
+          />
         </div>
         <div style={styles.results}>
           <ResultsTable columnNames={this.state.columnNames} data={this.state.data} />

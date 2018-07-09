@@ -6,6 +6,7 @@ import ResultRow from './ResultRow.jsx';
 const styles = {
   table: {
     fontSize: '14px',
+    marginTop: '25px',
   },
 };
 
