@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import axios from 'axios';
 import QueryEditor from './components/QueryEditor.jsx';
 import QueryDetails from './components/QueryDetails.jsx';
+import Chart from './components/Chart.jsx';
 import ResultsTable from './components/ResultsTable.jsx';
 
 const styles = {
@@ -31,7 +32,8 @@ class App extends React.Component {
       title: '',
       description: '',
       query: 'select * from related_products where product_id = 4;',
-      results: [],
+      columnNames: [],
+      data: [],
     };
 
     this.runQuery = this.runQuery.bind(this);
@@ -49,7 +51,7 @@ class App extends React.Component {
           description: response.description,
           query: response.query,
         }, () => {
-          this.runQuery(); // just realized that this shouldn't take a param, should just use the state
+          this.runQuery();
         });
       }).catch((error) => {
         console.log(error);
@@ -68,7 +70,8 @@ class App extends React.Component {
       query: this.state.query,
     }).then((response) => {
       this.setState({
-        results: response.data.rows,
+        columnNames: response.data.columns,
+        data: response.data.data,
       });
     }).catch((error) => {
       console.log(error);
@@ -99,13 +102,16 @@ class App extends React.Component {
         <div style={styles.query}>
           <QueryEditor
             query={this.state.query}
-            handleChange={this.updateQueryText} 
+            handleChange={this.updateQueryText}
             handleSubmit={this.runQuery}
           />
           <QueryDetails handleSubmit={this.saveQuery} />
         </div>
+        <div>
+          <Chart columnNames={this.state.columnNames} data={this.state.data} />
+        </div>
         <div style={styles.results}>
-          <ResultsTable data={this.state.results} />
+          <ResultsTable columnNames={this.state.columnNames} data={this.state.data} />
         </div>
       </div>
     );

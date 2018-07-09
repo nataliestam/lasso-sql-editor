@@ -13,7 +13,7 @@ const ResultsTable = (props) => {
   if (props.data.length > 0) {
     return (
       <table style={styles.table}>
-        <ResultHeader row={Object.keys(props.data[0])} />
+        <ResultHeader row={props.columnNames} />
         <tbody>
           {props.data.map((row, i) => <ResultRow key={i} row={row} />)}
         </tbody>
@@ -25,7 +25,8 @@ const ResultsTable = (props) => {
 };
 
 ResultsTable.propTypes = {
-  data: PropTypes.arrayOf(PropTypes.object).isRequired,
+  data: PropTypes.arrayOf(PropTypes.array).isRequired,
+  columnNames: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 export default ResultsTable;

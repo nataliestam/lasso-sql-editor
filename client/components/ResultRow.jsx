@@ -25,7 +25,7 @@ const ResultRow = props => (
 );
 
 ResultRow.propTypes = {
-  row: PropTypes.object.isRequired,
+  row: PropTypes.array.isRequired,
 };
 
 
