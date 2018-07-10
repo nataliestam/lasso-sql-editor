@@ -24,7 +24,7 @@ class SavedQuery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.queryId,
+      id: this.props.match.params.id,
       title: '',
       description: '',
       query: '',
@@ -39,9 +39,7 @@ class SavedQuery extends React.Component {
   }
 
   componentDidMount() {
-    if (parseInt(this.state.id) > 0) {
-      this.getQuery();
-    }
+    this.getQuery();
   }
 
   // retrieves query text based on id
@@ -140,11 +138,7 @@ class SavedQuery extends React.Component {
 }
 
 SavedQuery.propTypes = {
-  queryId: PropTypes.string,
-};
-
-SavedQuery.defaultProps = {
-  queryId: '0',
+  match: PropTypes.object.isRequired,
 };
 
 export default SavedQuery;

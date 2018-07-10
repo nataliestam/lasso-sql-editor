@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
 import axios from 'axios';
 
 const styles = {
@@ -51,7 +52,9 @@ class Home extends React.Component {
             {
               this.state.queries.map(query => (
                 <tr key={query._id}>
-                  <td style={styles.row} >{query.title}</td>
+                  <td style={styles.row} >
+                    <Link to={`/saved/${query._id}`}>{query.title}</Link>
+                  </td>
                   <td style={styles.row} >{query.description}</td>
                 </tr>
             ))
