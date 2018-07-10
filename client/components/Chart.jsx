@@ -9,14 +9,14 @@ const Chart = (props) => {
     if (
       props.data[0].length === 2
       && typeof props.data[0][0] === 'string'
-      && typeof props.data[0][1] === 'number'
+      && typeof parseInt(props.data[0][1]) === 'number'
     ) {
       return <BarChart2Col data={props.data} columnNames={props.columnNames} />;
     } else if (
       props.data[0].length === 3
       && typeof props.data[0][0] === 'string'
-      && typeof props.data[0][1] === 'number'
-      && typeof props.data[0][2] === 'number'
+      && typeof parseInt(props.data[0][1]) === 'number'
+      && typeof parseInt(props.data[0][2]) === 'number'
     ) {
       return <BarChart3Col data={props.data} columnNames={props.columnNames} />;
     } else if (
