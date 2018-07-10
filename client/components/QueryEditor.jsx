@@ -40,7 +40,7 @@ class QueryEditor extends React.Component {
   }
 
   handleChange(e) {
-    this.props.handleChange(e.target.value);
+    this.props.handleChange(e);
   }
 
   handleRun() {

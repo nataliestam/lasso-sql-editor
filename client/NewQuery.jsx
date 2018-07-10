@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import Header from './components/Header.jsx';
 import QueryEditor from './components/QueryEditor.jsx';
 import QueryDetails from './components/QueryDetails.jsx';
 import Chart from './components/Chart.jsx';
@@ -21,7 +20,7 @@ const styles = {
   },
 };
 
-class App extends React.Component {
+class NewQuery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -49,7 +48,6 @@ class App extends React.Component {
   getQuery() {
     axios.get(`/query/saved/${this.state.id}`)
       .then((response) => {
-        console.log(response)
         this.setState({
           title: response.data.title,
           description: response.data.description,
@@ -111,7 +109,6 @@ class App extends React.Component {
   render() {
     return (
       <div style={styles.body}>
-        <Header />
         <div style={styles.query}>
           <QueryEditor
             query={this.state.query}
@@ -142,12 +139,12 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = {
+NewQuery.propTypes = {
   queryId: PropTypes.string,
 };
 
-App.defaultProps = {
+NewQuery.defaultProps = {
   queryId: '0',
 };
 
-export default App;
+export default NewQuery;

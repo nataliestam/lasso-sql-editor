@@ -1,32 +1,33 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Link } from 'react-router-dom';
-import App from './App.jsx'
+import NewQuery from './NewQuery.jsx';
+import Home from './Home.jsx';
 
 const styles = {
-  heading: {
+  body: {
+    fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+  },
+  header: {
     margin: '10px',
     marginLeft: '20px',
+    fontSize: '45px',
   },
   links: {
-
+    margin: '20px',
   },
 };
-
-const Home = () => (
-  <div>
-    <h2>Home</h2>
-  </div>
-);
 
 const Header = () => (
   <Router>
     <div>
-      <h1 style={styles.heading}>Lasso</h1>
-      <Link to="/">Home</Link>
-      <Link to="/query">New Query</Link>
+      <div style={styles.body}>
+        <span style={styles.header}>Lasso</span>
+        <Link style={styles.links} to="/">Home</Link>
+        <Link style={styles.links} to="/query">New Query</Link>
+      </div>
 
       <Route exact path="/" component={Home} />
-      <Route path="/query" component={App} />
+      <Route path="/query" component={NewQuery} />
     </div>
   </Router>
 );
