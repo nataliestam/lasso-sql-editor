@@ -1,6 +1,19 @@
 import React from 'react';
 import axios from 'axios';
 
+const styles = {
+  table: {
+    fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
+    fontSize: '14px',
+    margin: '25px',
+  },
+  row: {
+    borderTop: '1px solid #ddd',
+    textAlign: 'left',
+    padding: '5px',
+  },
+};
+
 class Home extends React.Component {
   constructor() {
     super();
@@ -27,7 +40,7 @@ class Home extends React.Component {
   render() {
     return (
       <div>
-        <table>
+        <table style={styles.table}>
           <thead>
             <tr>
               <th>Name</th>
@@ -38,8 +51,8 @@ class Home extends React.Component {
             {
               this.state.queries.map(query => (
                 <tr key={query._id}>
-                  <td>{query.title}</td>
-                  <td>{query.description}</td>
+                  <td style={styles.row} >{query.title}</td>
+                  <td style={styles.row} >{query.description}</td>
                 </tr>
             ))
           }
