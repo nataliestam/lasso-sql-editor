@@ -60,9 +60,9 @@ class NewQuery extends React.Component {
       });
   }
 
-  updateQueryText(query) {
+  updateQueryText(e) {
     this.setState({
-      query,
+      query: e.target.value,
     });
   }
 
