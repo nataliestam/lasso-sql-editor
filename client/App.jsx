@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
+import Header from './components/Header.jsx';
 import QueryEditor from './components/QueryEditor.jsx';
 import QueryDetails from './components/QueryDetails.jsx';
 import Chart from './components/Chart.jsx';
@@ -9,10 +10,6 @@ import ResultsTable from './components/ResultsTable.jsx';
 const styles = {
   body: {
     fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
-  },
-  heading: {
-    margin: '10px',
-    marginLeft: '20px',
   },
   query: {
     display: 'flex',
@@ -114,7 +111,7 @@ class App extends React.Component {
   render() {
     return (
       <div style={styles.body}>
-        <h1 style={styles.heading}>Lasso</h1>
+        <Header />
         <div style={styles.query}>
           <QueryEditor
             query={this.state.query}

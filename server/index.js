@@ -6,6 +6,7 @@ const userdb = require('../db/postgres-client.js');
 
 const app = express();
 app.use(bodyParser.json());
+app.use('/', express.static(path.join(__dirname, '/../public')));
 app.use('/query', express.static(path.join(__dirname, '/../public')));
 app.use('/query/:id', express.static(path.join(__dirname, '/../public')));
 
