@@ -31,41 +31,23 @@ const styles = {
   },
 };
 
-class QueryEditor extends React.Component {
-  constructor(props) {
-    super(props);
+const QueryEditor = props => (
+  <div style={styles.body}>
+    <textarea
+      style={styles.editor}
+      type="text"
+      value={props.query}
+      onChange={e => props.handleChange(e)}
+    />
+    <button
+      onClick={props.handleSubmit}
+      style={styles.runButton}
+    >
+      Run
+    </button>
+  </div>
+);
 
-    this.handleChange = this.handleChange.bind(this);
-    this.handleRun = this.handleRun.bind(this);
-  }
-
-  handleChange(e) {
-    this.props.handleChange(e.target.value);
-  }
-
-  handleRun() {
-    this.props.handleSubmit();
-  }
-
-  render() {
-    return (
-      <div style={styles.body}>
-        <textarea
-          style={styles.editor}
-          type="text"
-          value={this.props.query}
-          onChange={this.handleChange}
-        />
-        <button
-          onClick={this.handleRun}
-          style={styles.runButton}
-        >
-          Run
-        </button>
-      </div>
-    );
-  }
-}
 
 QueryEditor.propTypes = {
   query: PropTypes.string.isRequired,

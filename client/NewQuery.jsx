@@ -10,10 +10,6 @@ const styles = {
   body: {
     fontFamily: '"Helvetica Neue", Helvetica, Arial, sans-serif',
   },
-  heading: {
-    margin: '10px',
-    marginLeft: '20px',
-  },
   query: {
     display: 'flex',
     justifyContent: 'space-around',
@@ -24,11 +20,10 @@ const styles = {
   },
 };
 
-class App extends React.Component {
+class NewQuery extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: this.props.queryId,
       title: '',
       description: '',
       query: '',
@@ -42,32 +37,9 @@ class App extends React.Component {
     this.updateQueryText = this.updateQueryText.bind(this);
   }
 
-  componentDidMount() {
-    if (parseInt(this.state.id) > 0) {
-      this.getQuery();
-    }
-  }
-
-  // retrieves query text based on id
-  getQuery() {
-    axios.get(`/query/saved/${this.state.id}`)
-      .then((response) => {
-        console.log(response)
-        this.setState({
-          title: response.data.title,
-          description: response.data.description,
-          query: response.data.query,
-        }, () => {
-          this.runQuery();
-        });
-      }).catch((error) => {
-        console.log(error);
-      });
-  }
-
-  updateQueryText(query) {
+  updateQueryText(e) {
     this.setState({
-      query,
+      query: e.target.value,
     });
   }
 
@@ -102,9 +74,7 @@ class App extends React.Component {
         description: this.state.description,
         query: this.state.query,
       }).then((response) => {
-        this.setState({
-          id: response.data._id,
-        });
+        console.log(`query saved!  id is ${response.data._id}`);
       }).catch((error) => {
         console.log(error);
       });
@@ -114,7 +84,6 @@ class App extends React.Component {
   render() {
     return (
       <div style={styles.body}>
-        <h1 style={styles.heading}>Lasso</h1>
         <div style={styles.query}>
           <QueryEditor
             query={this.state.query}
@@ -145,12 +114,4 @@ class App extends React.Component {
   }
 }
 
-App.propTypes = {
-  queryId: PropTypes.string,
-};
-
-App.defaultProps = {
-  queryId: '0',
-};
-
-export default App;
+export default NewQuery;

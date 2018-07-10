@@ -41,3 +41,14 @@ module.exports.updateQuery = (id, update, callback) => {
     }
   });
 };
+
+module.exports.getAllQueries = (callback) => {
+  const query = Query.find().sort({ _id: -1 }).limit(20);
+  query.exec((err, data) => {
+    if (err) {
+      callback(err);
+    } else {
+      callback(null, data);
+    }
+  });
+};

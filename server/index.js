@@ -6,6 +6,7 @@ const userdb = require('../db/postgres-client.js');
 
 const app = express();
 app.use(bodyParser.json());
+app.use('/', express.static(path.join(__dirname, '/../public')));
 app.use('/query', express.static(path.join(__dirname, '/../public')));
 app.use('/query/:id', express.static(path.join(__dirname, '/../public')));
 
@@ -27,6 +28,17 @@ app.post('/query/run', (req, res) => {
 });
 
 // queries to application db
+app.get('/home/all', (req, res) => {
+  db.getAllQueries((err, data) => {
+    if (err) {
+      res.status(500).send(err);
+    } else {
+      res.status(200).send(data);
+    }
+  });
+});
+
+
 app.get('/query/saved/:id', (req, res) => {
   db.retrieveQuery(req.params.id, (err, data) => {
     if (err) {
