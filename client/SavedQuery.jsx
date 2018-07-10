@@ -87,20 +87,28 @@ class SavedQuery extends React.Component {
     });
   }
 
+  updateQueryTitle(e) {
+    this.setState({
+      title: e.target.value,
+    });
+  }
+
+  updateQueryDesc(e) {
+    this.setState({
+      description: e.target.value,
+    });
+  }
+
   // saves the query, title, and desc to mongo
-  saveQuery(title, description) {
-    this.setState({ title, description }, () => {
-      axios.post('/query/saved', {
-        title: this.state.title,
-        description: this.state.description,
-        query: this.state.query,
-      }).then((response) => {
-        this.setState({
-          id: response.data._id,
-        });
-      }).catch((error) => {
-        console.log(error);
-      });
+  saveQuery() {
+    axios.post('/query/saved', {
+      title: this.state.title,
+      description: this.state.description,
+      query: this.state.query,
+    }).then((response) => {
+      console.log(`query saved!  id is ${response.data._id}`);
+    }).catch((error) => {
+      console.log(error);
     });
   }
 
@@ -116,6 +124,8 @@ class SavedQuery extends React.Component {
           <QueryDetails
             title={this.state.title}
             description={this.state.description}
+            handleTitleChange={this.updateQueryTitle}
+            handleDescChange={this.updateQueryDesc}
             handleSubmit={this.saveQuery}
           />
         </div>
