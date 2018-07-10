@@ -1,5 +1,4 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import axios from 'axios';
 import QueryEditor from './components/QueryEditor.jsx';
 import QueryDetails from './components/QueryDetails.jsx';
@@ -21,8 +20,8 @@ const styles = {
 };
 
 class NewQuery extends React.Component {
-  constructor(props) {
-    super(props);
+  constructor() {
+    super();
     this.state = {
       title: '',
       description: '',
