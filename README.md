@@ -10,8 +10,8 @@ An in-browser SQL editor built with React &amp; Node.js.
 
 ## Charts
 Lasso will auto-generate a data visualization if the order of the columns matches one of the data structures below. (More coming soon!)
-- Scatter Plot - (number, number)
-- Bar Chart - (string, number)
+- Scatter Plot (number, number)
+- Bar Chart (string, number)
 - Grouped Bar Chart (string, number, number)
 
 ## Development
