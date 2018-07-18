@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import axios from 'axios';
-import QueryEditor from './components/QueryEditor.jsx';
+import AceQueryEditor from './components/AceQueryEditor.jsx';
 import QueryDetails from './components/QueryDetails.jsx';
 import Chart from './components/Chart.jsx';
 import ResultsTable from './components/ResultsTable.jsx';
@@ -116,7 +116,7 @@ class SavedQuery extends React.Component {
     return (
       <div style={styles.body}>
         <div style={styles.query}>
-          <QueryEditor
+          <AceQueryEditor
             query={this.state.query}
             handleChange={this.updateQueryText}
             handleSubmit={this.runQuery}

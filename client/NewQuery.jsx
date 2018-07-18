@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import QueryEditor from './components/QueryEditor.jsx';
+import AceQueryEditor from './components/AceQueryEditor.jsx';
 import QueryDetails from './components/QueryDetails.jsx';
 import Chart from './components/Chart.jsx';
 import ResultsTable from './components/ResultsTable.jsx';
@@ -38,9 +39,10 @@ class NewQuery extends React.Component {
     this.updateQueryDesc = this.updateQueryDesc.bind(this);
   }
 
-  updateQueryText(e) {
+  updateQueryText(newValue) {
     this.setState({
-      query: e.target.value,
+      // query: e.target.value,
+      query: newValue,
     });
   }
 
@@ -96,7 +98,7 @@ class NewQuery extends React.Component {
     return (
       <div style={styles.body}>
         <div style={styles.query}>
-          <QueryEditor
+          <AceQueryEditor
             query={this.state.query}
             handleChange={this.updateQueryText}
             handleSubmit={this.runQuery}
